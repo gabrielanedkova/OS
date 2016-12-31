@@ -1,0 +1,73 @@
+#Габриела Недкова, Информатика, 45097
+#! bin/bash
+
+if [ $# -ne 2 ]
+then
+  echo "Please enter branching"
+  read branch
+  echo "Please enter year"
+  read year 
+  set -- "$branch" "$year"
+fi
+branch=$1
+year=$2
+while [ $branch -lt 0 ]
+do
+  echo "Please enter positive branch"
+  read branch
+done
+
+while [ $year -lt 0 ]
+do
+  echo "Please enter positive year"
+  read year
+done
+
+set -- "$branch" "$year"
+array=("\033[31m" "\033[32m" "\033[37m")
+for i in $(seq 1 $1)
+do
+  j="0"
+  while [ $j -lt $(expr $1 - $i) ]
+  do
+    printf " "
+    let j=j+1
+  done
+  k="0"
+  while [ $k -lt $i ]
+  do
+   random=$(( RANDOM % 3  ))
+    printf "${array[${random}]}* "
+    let  k=k+1
+  done 
+  printf "\n"
+done
+j="0"
+while [ $j -lt $(expr $1 / 2) ]
+do
+  printf " "
+  let j=j+1
+done 
+start=1
+if [ $(($1%2)) -eq 0 ]
+then
+    start=2
+fi
+for i in $(seq $start $1)
+do
+  random=$(( RANDOM % 3  ))
+  printf "${array[${random}]}*"
+done
+printf "\n"
+s=$2
+size=$(expr ${#s} + 4)
+spaces=$(expr $1 + $1)
+spaces=$(expr $spaces - $size)
+spaces=$(expr $spaces / 2)
+i="0"
+while [ $i -lt $spaces ]
+do
+  printf " "
+  let i=i+1
+done
+echo "ЧНГ $2"
